@@ -32,7 +32,7 @@ public class StatementPrinter {
             Play play = plays.get(p.getPlayID());
 
             int thisAmount = 0;
-            switch (play.type) {
+            switch (play.getType()) {
                 case "tragedy":
                     thisAmount = 40000;
                     if (p.getAudience() > Constants.TRAGEDY_AUDIENCE_THRESHOLD) {
@@ -49,16 +49,16 @@ public class StatementPrinter {
                     thisAmount += Constants.COMEDY_AMOUNT_PER_AUDIENCE * p.getAudience();
                     break;
                 default:
-                    throw new RuntimeException(String.format("unknown type: %s", play.type));
+                    throw new RuntimeException(String.format("unknown type: %s", play.getType()));
             }
 
             // add volume credits
             volumeCredits += Math.max(p.getAudience() - Constants.BASE_VOLUME_CREDIT_THRESHOLD, 0);
             // add extra credit for every five comedy attendees
-            if ("comedy".equals(play.type)) volumeCredits += p.getAudience() / Constants.COMEDY_EXTRA_VOLUME_FACTOR;
+            if ("comedy".equals(play.getType())) volumeCredits += p.getAudience() / Constants.COMEDY_EXTRA_VOLUME_FACTOR;
 
             // print line for this order
-            result.append(String.format("  %s: %s (%s seats)%n", play.name, frmt.format(thisAmount / 100), p.getAudience()));
+            result.append(String.format("  %s: %s (%s seats)%n", play.getName(), frmt.format(thisAmount / 100), p.getAudience()));
             totalAmount += thisAmount;
         }
         result.append(String.format("Amount owed is %s%n", frmt.format(totalAmount / 100)));
