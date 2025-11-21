@@ -838,3 +838,4 @@ Compare this to how easy it was to implement the new features in the refactored 
 When you have time after the course, we also encourage you to read the full
 Refactoring textbook in more detail, as this exercise just scratched the surface of
 refactoring!
+ 
